@@ -102,6 +102,12 @@ var _createStore = __webpack_require__(10);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
+var _reactRouterConfig = __webpack_require__(18);
+
+var _routes = __webpack_require__(19);
+
+var _routes2 = _interopRequireDefault(_routes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -109,6 +115,14 @@ var app = (0, _express2.default)();
 app.use(_express2.default.static('public'));
 app.get('*', function (req, res) {
   var store = (0, _createStore2.default)();
+
+  var promises = (0, _reactRouterConfig.matchRoutes)(_routes2.default, req.path).map(function (_ref) {
+    var route = _ref.route;
+
+    return route.loadData ? route.loadData(store) : null;
+  });
+
+  console.log(promises);
   res.send((0, _renderer2.default)(req, store));
 });
 
@@ -205,6 +219,7 @@ exports.default = [{
   component: _Home2.default,
   exact: true
 }, {
+  loadData: _UsersList.loadData,
   path: '/users',
   component: _UsersList2.default
 }];
@@ -407,6 +422,7 @@ module.exports = require("axios");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.loadData = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -474,6 +490,10 @@ function mapStateToProps(state) {
   return { users: state.users };
 }
 
+function loadData(store) {
+  return store.dispatch((0, _actions.fetchUsers)());
+}
+exports.loadData = loadData;
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList);
 
 /***/ }),
@@ -487,6 +507,41 @@ module.exports = require("babel-polyfill");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-config");
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Home = __webpack_require__(8);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+var _UsersList = __webpack_require__(16);
+
+var _UsersList2 = _interopRequireDefault(_UsersList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = [{
+  path: '/',
+  component: _Home2.default,
+  exact: true
+}, {
+  loadData: _UsersList.loadData,
+  path: '/users',
+  component: _UsersList2.default
+}];
 
 /***/ })
 /******/ ]);
