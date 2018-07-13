@@ -62,3 +62,25 @@ export default () => {
   window.INITIAL_STATE = ${serialize(store.getState())}
 </script>
 ```
+
+## google認証
+- portの設定は最初なんでもいいけど、googleauthする時は3000番でないと弾かれるので要注意
+
+## cssのスタイリング
+- helpers/renderer.jsにレンダリングしているのでそこに追記
+```js
+return `
+  <html>
+    <head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    </head>
+    <body>
+      <div id="root">${content}</div>
+      <script>
+        window.INITIAL_STATE = ${serialize(store.getState())}
+      </script>
+      <script src="bundle.js"></script>
+    </body>
+  <html>`;
+```

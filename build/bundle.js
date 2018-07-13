@@ -118,7 +118,7 @@ var app = (0, _express2.default)();
 
 app.use('/api', (0, _expressHttpProxy2.default)('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator: function proxyReqOptDecorator(opts) {
-    opts.headers['x-forwarded-host'] = 'localhost:9999';
+    opts.headers['x-forwarded-host'] = 'localhost:3000';
     return opts;
   }
 }));
@@ -138,8 +138,8 @@ app.get('*', function (req, res) {
   });
 });
 
-app.listen(9999, function () {
-  console.log('Listening on port 9999');
+app.listen(3000, function () {
+  console.log('Listening on port 3000');
 });
 
 /***/ }),
@@ -196,7 +196,7 @@ exports.default = function (req, store) {
     )
   ));
 
-  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    <html>';
+  return '\n    <html>\n      <head>\n      <!-- Compiled and minified CSS -->\n      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    <html>';
 };
 
 /***/ }),
@@ -513,18 +513,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Home = function Home() {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'center-align', style: { marginTop: '200px' } },
     _react2.default.createElement(
-      'div',
+      'h3',
       null,
-      'home Vely vely Best component'
+      'Welcome'
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: function onClick() {
-          return console.log('Hi ther!');
-        } },
-      'press me!!!'
+      'p',
+      null,
+      'Check out these awesome features'
     )
   );
 };
@@ -700,13 +698,54 @@ var Header = function Header(_ref) {
   var auth = _ref.auth;
 
   console.log('status', auth);
+
+  var authButton = auth ? _react2.default.createElement(
+    'a',
+    { href: '/api/logout' },
+    'Logout'
+  ) : _react2.default.createElement(
+    'a',
+    { href: '/api/auth/google' },
+    'Login'
+  );
   return _react2.default.createElement(
-    'div',
+    'nav',
     null,
     _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: '/' },
-      'React SSR'
+      'div',
+      { className: 'nav-wrapper' },
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: 'brand-logo', to: '/' },
+        'React SSR'
+      ),
+      _react2.default.createElement(
+        'ul',
+        { className: 'right' },
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/users' },
+            'Users'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/admins' },
+            'Admins'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          authButton
+        )
+      )
     )
   );
 };

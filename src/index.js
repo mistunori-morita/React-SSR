@@ -12,7 +12,7 @@ const app = express();
 
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator(opts){
-    opts.headers['x-forwarded-host'] = 'localhost:9999';
+    opts.headers['x-forwarded-host'] = 'localhost:3000';
     return opts;
   }
 }))
@@ -30,6 +30,6 @@ app.get('*', (req, res) => {
   })
 });
 
-app.listen(9999,() =>{
-  console.log('Listening on port 9999');
+app.listen(3000,() =>{
+  console.log('Listening on port 3000');
 });
