@@ -49,3 +49,16 @@ export default () => {
     <html>`;
 }
 ```
+
+
+## xss攻撃の緩和（シリアライズさせる）
+- `import serialize from 'serialize-javascript';`
+```js
+<script>
+  window.INITIAL_STATE = ${JSON.stringify(store.getState())}
+</script>
+↓こちらに変更する
+<script>
+  window.INITIAL_STATE = ${serialize(store.getState())}
+</script>
+```
