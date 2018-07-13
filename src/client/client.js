@@ -9,7 +9,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import { renderRoutes } from 'react-router-config'
-import axios from './reducers';
+import axios from 'axios';
 
 
 const axiosInstance = axios.create({

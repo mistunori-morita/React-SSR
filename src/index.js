@@ -12,13 +12,14 @@ const app = express();
 
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator(opts){
-    opts.header['x-forwarded-host'] = 'localhost:9999';
+    opts.headers['x-forwarded-host'] = 'localhost:9999';
     return opts;
   }
 }))
+
 app.use(express.static('public'))
 app.get('*', (req, res) => {
-  const store = createStore()
+  const store = createStore(req)
 
   const promises = matchRoutes(Routes, req.path).map(({ route}) => {
     return route.loadData ? route.loadData(store) : null;
@@ -27,7 +28,6 @@ app.get('*', (req, res) => {
   Promise.all(promises).then(() => {
     res.send(renderer(req, store));
   })
-
 });
 
 app.listen(9999,() =>{
