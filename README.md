@@ -1,6 +1,6 @@
 # React-server-side-rendering
 ## build
--  npm run dev:build-server
+- `npm run dev`
 
 ## webpackメモ
 ```js
