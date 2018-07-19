@@ -16,7 +16,7 @@ class UsersList extends Component {
 
   render(){
     return(
-      <div>
+      <div className="container" style={{marginTop: '30px'}}>
         Heres a big list of users;
         <ul>{this.renderUsers()}</ul>
       </div>

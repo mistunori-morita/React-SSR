@@ -16,9 +16,11 @@ class AdminsListPage extends Component{
 
   render(){
     return(
-      <div>
-      <h3>Protected list of admins</h3>
-      <ul>{this.renderAdmins()}</ul>
+      <div className="row">
+        <div className="container">
+          <h3>Protected list of admins</h3>
+          <ul>{this.renderAdmins()}</ul>
+        </div>
       </div>
     )
   }

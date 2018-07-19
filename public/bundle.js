@@ -36567,7 +36567,7 @@ var UsersList = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'container', style: { marginTop: '30px' } },
         'Heres a big list of users;',
         _react2.default.createElement(
           'ul',
@@ -37833,16 +37833,20 @@ var AdminsListPage = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'row' },
         _react2.default.createElement(
-          'h3',
-          null,
-          'Protected list of admins'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          this.renderAdmins()
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Protected list of admins'
+          ),
+          _react2.default.createElement(
+            'ul',
+            null,
+            this.renderAdmins()
+          )
         )
       );
     }
@@ -38417,7 +38421,7 @@ var Header = function Header(_ref) {
       { className: 'nav-wrapper' },
       _react2.default.createElement(
         _reactRouterDom.Link,
-        { className: 'brand-logo', to: '/' },
+        { className: 'brand-logo', to: '/', style: { paddingLeft: '10px' } },
         'React SSR'
       ),
       _react2.default.createElement(

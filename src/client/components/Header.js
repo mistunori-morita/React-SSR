@@ -10,8 +10,8 @@ const Header = ({ auth}) => {
   return (
     <nav>
     <div className="nav-wrapper">
-      <Link className="brand-logo" to="/">React SSR</Link>
-      <ul className="right">
+      <Link className="brand-logo" to="/" style={{ paddingLeft:'10px'}}>React SSR</Link>
+        <ul className="right">
         <li><Link to="/users">Users</Link></li>
         <li><Link to="/admins">Admins</Link></li>
         <li>{authButton}</li>
