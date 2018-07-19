@@ -25,7 +25,8 @@ app.get('*', (req, res) => {
     return route.loadData ? route.loadData(store) : null;
   })
 
-  Promise.all(promises).then(() => {
+
+  const render = () => {
     const context = {};
     const content = renderer(req, store, context);
 
@@ -34,7 +35,11 @@ app.get('*', (req, res) => {
     }
 
     res.send(content);
-  })
+  }
+
+
+  Promise.all(promises).then(render).catch(render)
+
 });
 
 app.listen(3000,() =>{
