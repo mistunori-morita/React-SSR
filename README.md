@@ -86,3 +86,9 @@ return `
     </body>
   <html>`;
 ```
+
+
+## metatag
+- react-helmet
+- https://github.com/nfl/react-helmet
+- https://d.akiroom.com/2017-01/react-helmet-html-head/
